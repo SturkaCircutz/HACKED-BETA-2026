@@ -1,0 +1,42 @@
+[
+  {
+    "jurisdiction_id": "ca-ab-edmonton",
+    "category": "general",
+    "name": "City of Edmonton 311",
+    "description": "Non-emergency city services: litter, illegal dumping, graffiti, potholes, noise, trees, drainage.",
+    "phone": "311",
+    "email": null,
+    "hours": "24/7",
+    "source_url": "https://www.edmonton.ca/programs_services/311"
+  },
+  {
+    "jurisdiction_id": "ca-ab-edmonton",
+    "category": "general",
+    "name": "City of Edmonton 311 (outside Edmonton)",
+    "description": "311 line when calling from outside city limits or from a mobile that cannot dial 311.",
+    "phone": "780-442-5311",
+    "email": null,
+    "hours": "24/7",
+    "source_url": "https://www.edmonton.ca/programs_services/311"
+  },
+  {
+    "jurisdiction_id": "ca-ab",
+    "category": "water",
+    "name": "Alberta Environment - environmental emergencies / complaints line",
+    "description": "Spills, releases to water, air or land, and environmental complaints in Alberta.",
+    "phone": "1-800-222-6514",
+    "email": null,
+    "hours": "24/7",
+    "source_url": "https://www.alberta.ca/report-environmental-emergencies"
+  },
+  {
+    "jurisdiction_id": "ca-ab",
+    "category": "air",
+    "name": "Alberta Environment - environmental emergencies / complaints line",
+    "description": "Smoke, odours, industrial air releases and other air quality complaints in Alberta.",
+    "phone": "1-800-222-6514",
+    "email": null,
+    "hours": "24/7",
+    "source_url": "https://www.alberta.ca/report-environmental-emergencies"
+  }
+]
