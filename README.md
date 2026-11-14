@@ -12,7 +12,7 @@
 Create a file named `agent/.env` in the project root and add your [Groq API key](https://console.groq.com/keys):
 
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+COHERE_API_KEY=wsfW2eVDC53Z6SsKGZPVgCN7z4vCA8OMvw6gsc7o
 ```
 
 ### 2. Dependencies
