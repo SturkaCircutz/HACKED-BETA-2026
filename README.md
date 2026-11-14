@@ -1,6 +1,7 @@
 # HACKED-BETA-2026
 # Zero Hero
-
+## Demo
+https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d
 **Less waste. More possibility.**
 
 An AI-powered environmental reporting web app built for **HACKED 2026**.
