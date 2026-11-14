@@ -1,7 +1,13 @@
 """Runtime configuration, loaded from environment variables (or a .env file)."""
 from functools import lru_cache
 
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+# Export .env into the process environment too: provider SDKs (Cohere, Groq, OpenAI) and the
+# agent/ module read their API keys from os.environ, not from Settings.
+load_dotenv(".env")
 
 
 class Settings(BaseSettings):

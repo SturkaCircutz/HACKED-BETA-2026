@@ -29,6 +29,8 @@ def get_chat_model(kind: str = "chat"):
     model = (settings.vision_model or settings.llm_model) if kind == "vision" else settings.llm_model
     if not model and kind in {"chat", "followup"} and os.getenv("GROQ_API_KEY"):
         model = "groq:" + (os.getenv("ECO311_MODEL") or "openai/gpt-oss-20b").removeprefix("groq:")
+    if not model and os.getenv("COHERE_API_KEY"):
+        model = "cohere:" + (os.getenv("COHERE_MODEL") or "command-a-03-2025").removeprefix("cohere:")
     if not model or (kind == "vision" and "gpt-oss" in model):
         return None
     try:
@@ -38,6 +40,10 @@ def get_chat_model(kind: str = "chat"):
             options = {"reasoning_effort": "low"} if "gpt-oss" in model else {}
             return ChatGroq(model=model.removeprefix("groq:"), temperature=0.2,
                             max_tokens=1400, timeout=timeout, max_retries=0, **options)
+        if model.startswith("cohere:"):
+            from langchain_cohere import ChatCohere  # takes timeout_seconds; a plain timeout is ignored
+            return ChatCohere(model=model.removeprefix("cohere:"), temperature=0.2, timeout_seconds=timeout,
+                              max_retries=0)
         from langchain.chat_models import init_chat_model
         return init_chat_model(model, temperature=0.2, timeout=timeout, max_retries=0)
     except Exception:

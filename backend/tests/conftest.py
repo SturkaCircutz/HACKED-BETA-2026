@@ -9,6 +9,8 @@ os.environ.update({
     "LLM_MODEL": "",
     "EMBEDDING_MODEL": "",
     "TAVILY_API_KEY": "",
+    "COHERE_API_KEY": "",
+    "GROQ_API_KEY": "",
     "JWT_SECRET": "",
 })
 
