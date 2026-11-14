@@ -9,7 +9,7 @@
 
 ### 1. Setup
 
-Create a file named `agent/.env` in the project root and add your [Groq API key](https://console.groq.com/keys):
+Create a file named `agent/.env` in the project root and add the key (individual does not need this step as server provides)
 
 ```env
 COHERE_API_KEY=wsfW2eVDC53Z6SsKGZPVgCN7z4vCA8OMvw6gsc7o
