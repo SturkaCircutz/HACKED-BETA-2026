@@ -1,0 +1,44 @@
+# Local production-like stack: Postgres + API + follow-up worker + static web behind nginx.
+#   docker compose up --build      -> http://localhost:8080
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: eco
+      POSTGRES_PASSWORD: eco
+      POSTGRES_DB: eco311
+    volumes: [dbdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eco -d eco311"]
+      interval: 3s
+      retries: 20
+
+  api:
+    build: ./backend
+    env_file: [{ path: ./backend/.env, required: false }]
+    environment:
+      DATABASE_URL: postgresql+psycopg://eco:eco@db:5432/eco311
+      PUBLIC_BASE_URL: http://localhost:8080
+      UPLOAD_DIR: /data/uploads
+      CORS_ORIGINS: '["http://localhost:8080"]'
+    volumes: [uploads:/data/uploads]
+    depends_on: { db: { condition: service_healthy } }
+    command: sh -c "python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers"
+
+  worker:
+    build: ./backend
+    env_file: [{ path: ./backend/.env, required: false }]
+    environment:
+      DATABASE_URL: postgresql+psycopg://eco:eco@db:5432/eco311
+    depends_on: { db: { condition: service_healthy } }
+    # In AWS this is an EventBridge schedule -> ECS task. Here: once an hour.
+    command: sh -c "while true; do python -m app.workers followup; sleep 3600; done"
+
+  web:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on: [api]
+
+volumes:
+  dbdata:
+  uploads:
