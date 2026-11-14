@@ -30,7 +30,7 @@ cd ..
 
 Open **two separate terminals**, both starting from the project root.
 
-**Terminal 1 — Backend**
+**Terminal 1 — Backend**  
 
 ```bash
 PYTHONPATH="$PWD" uv --directory backend run \
@@ -70,7 +70,8 @@ The Zero Hero web app is ready to use.
   </tr>
 </table>
 video link:
-https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d
+[https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d](https://vimeo.com/1246878160?fl=tl&fe=ec)
+
 
 ## Technical Implementation
 
@@ -87,7 +88,6 @@ https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d
 
 ### AI & Intelligence
 - **LangChain:** Integrates LLMs, manages prompts and messages, and enables structured AI responses.
-- **Groq API (GPT-OSS 20B):** Processes natural-language reports, classifies environmental issues, and generates AI-assisted recommendations.
 - **Retrieval-Augmented Generation (RAG):** Retrieves relevant municipal waste guidelines and contact information to support recommendations.
 - **Structured AI Output:** Organizes results into safety risk, recyclability, waste category, 311 assistance, and action steps.
 - **Location-Aware Assistance:** Uses report descriptions and geographic coordinates to provide locally relevant guidance.
