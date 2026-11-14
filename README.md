@@ -71,6 +71,7 @@ The Zero Hero web app is ready to use.
 </table>
 video link:
 https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d
+
 ## Technical Implementation
 
 ### Frontend
