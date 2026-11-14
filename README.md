@@ -100,3 +100,5 @@ video link:
 
 The submission is accepted in Devpost:
 https://hacked-beta-2026.devpost.com/?_gl=1*1752bti*_gcl_au*MTgyNzExMzAyNS4xNzk0NjczMDEx*_ga*NTM2Njc2NTE2LjE3OTQ2NzMwMTE.*_ga_0YHJK3Y10M*czE3OTQ2NzMwMTAkbzEkZzEkdDE3OTQ2NzczODQkajMwJGwwJGgw
+
+**Thank you so much!**
