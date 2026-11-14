@@ -1,11 +1,24 @@
-# HACKED-BETA-2026
-# Zero Hero
-
+# HACKED-BETA-2026- Zero Hero
+**Less waste. More possibility.**
 ## Demo
-<img width="1365" height="765" alt="HOMEPAGE" src="https://github.com/user-attachments/assets/e86f11d8-1fc6-4700-a7b1-5ecb93bac8f8" />
-<img width="1351" height="765" alt="image" src="https://github.com/user-attachments/assets/c0a4bfb1-3df7-4a7d-a4e8-b25d618fc711" />
-<img width="904" height="1562" alt="EXAMPLECHAT" src="https://github.com/user-attachments/assets/46611955-870b-4a2f-8399-f0b142aa3e42" />
-
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="https://github.com/user-attachments/assets/e86f11d8-1fc6-4700-a7b1-5ecb93bac8f8" width="300" alt="Homepage" />
+    </td>
+    <td align="center" width="33%">
+      <img src="https://github.com/user-attachments/assets/c0a4bfb1-3df7-4a7d-a4e8-b25d618fc711" width="300" alt="Interactive Map" />
+    </td>
+    <td align="center" width="33%">
+      <img src="https://github.com/user-attachments/assets/46611955-870b-4a2f-8399-f0b142aa3e42" width="300" alt="AI Chat" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Homepage</b></td>
+    <td align="center"><b>Interactive Map</b></td>
+    <td align="center"><b>AI Chat</b></td>
+  </tr>
+</table>
 video link:
 https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d
 
