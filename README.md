@@ -1,5 +1,10 @@
-# HACKED-BETA-2026- Zero Hero
+# HACKED-BETA-2026
+# Zero Hero
 **Less waste. More possibility.**
+
+Made by Team 'Goat of the Year'
+Kyumin Park - role in front-end, back-end, design AI-Agent driven service system, manage database and api
+Jiawen Sun - role in front-end, back-end, design structure of the project, deploy the project
 
 ## Quick Start
 
@@ -81,6 +86,7 @@ https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d
 - **SQLAlchemy + SQLite / PostgreSQL:** Database management for reports, agent execution states, and tracking.
 
 ### AI & Intelligence
+- **LangChain:** Integrates LLMs, manages prompts and messages, and enables structured AI responses.
 - **Groq API (GPT-OSS 20B):** Processes natural-language reports, classifies environmental issues, and generates AI-assisted recommendations.
 - **Retrieval-Augmented Generation (RAG):** Retrieves relevant municipal waste guidelines and contact information to support recommendations.
 - **Structured AI Output:** Organizes results into safety risk, recyclability, waste category, 311 assistance, and action steps.
