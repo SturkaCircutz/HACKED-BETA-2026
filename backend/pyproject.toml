@@ -20,6 +20,7 @@ dependencies = [
   "pydantic>=2.7,<3",
   "python-dotenv>=1,<2",
   "langchain-groq>=1.1,<2",
+  "langchain-cohere>=0.4",
 ]
 
 [project.optional-dependencies]

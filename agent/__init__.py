@@ -125,7 +125,7 @@ async def _decide(state: _State, config: RunnableConfig) -> dict:
     deps = config["configurable"]
     request, coarse = state["request"], state["coarse"]
     injected = deps.get("model")
-    if injected is None and (deps["offline"] or not os.getenv("GROQ_API_KEY")):
+    if injected is None and (deps["offline"] or not (os.getenv("GROQ_API_KEY") or os.getenv("COHERE_API_KEY"))):
         return {"decision": coarse, "llm_used": False, "llm_warning": "LLM interpretation is unavailable; deterministic rules were used."}
 
     evidence = [{k: d.get(k) for k in ("id", "title", "text", "source_url")} for d in state["knowledge"]]
@@ -151,6 +151,12 @@ async def _decide(state: _State, config: RunnableConfig) -> dict:
         async with asyncio.timeout(timeout):
             if injected is not None:
                 raw = await injected.ainvoke(messages)
+            elif not os.getenv("GROQ_API_KEY"):
+                # Cohere, used when only COHERE_API_KEY is configured.
+                from langchain_cohere import ChatCohere
+                llm = ChatCohere(model=(os.getenv("COHERE_MODEL") or "command-a-03-2025").removeprefix("cohere:"),
+                                 temperature=0, max_tokens=700, timeout_seconds=int(timeout), max_retries=0)
+                raw = await llm.with_structured_output(Decision, method="tool_calling").ainvoke(messages)
             else:
                 # Groq runs the GPT-OSS model remotely, without local model weights.
                 # This module deliberately does not use the teammate backend's LLM_MODEL.

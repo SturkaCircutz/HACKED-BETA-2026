@@ -1,6 +1,7 @@
 # Python 3.12 recommended, matching the teammate's backend.
 # Upper bounds keep this small module on the verified major APIs.
 langchain-groq>=1.1,<2
+langchain-cohere>=0.4
 langgraph>=1.0,<2
 httpx>=0.27,<1
 pydantic>=2.7,<3
