@@ -7,11 +7,11 @@ interface Props {
   busy: boolean
   onApprove: (edited: Partial<EmailDraft & CallDraft>) => void
   onEdit: (instructions: string) => void
-  onReject: () => void
+  onContinue: () => void
 }
 
 /** HUMAN REVIEW: shows the exact action that is about to be executed. */
-export function ApprovalCard({ actionType, draft, busy, onApprove, onEdit, onReject }: Props) {
+export function ApprovalCard({ actionType, draft, busy, onApprove, onEdit, onContinue }: Props) {
   const email = actionType === 'email' ? (draft as EmailDraft) : null
   const call = actionType === 'call' ? (draft as CallDraft) : null
   const [to, setTo] = useState(email?.to ?? '')
@@ -28,7 +28,7 @@ export function ApprovalCard({ actionType, draft, busy, onApprove, onEdit, onRej
 
   return (
     <div className="card approval" role="region" aria-label="Approval required">
-      <h4>{email ? 'Email send approval' : 'Call plan approval'}</h4>
+      <h4>{email ? 'Review before sending' : 'Your contact plan'}</h4>
       {!draft.contact_verified && (
         <div className="warn" style={{ marginBottom: 12 }}>
           This contact is <strong>unverified</strong>. Check it against the source before sending.
@@ -67,10 +67,10 @@ export function ApprovalCard({ actionType, draft, busy, onApprove, onEdit, onRej
       )}
       <div className="row" style={{ justifyContent: 'center' }}>
         <button className="btn go" disabled={busy || (!!email && !to.trim())} onClick={approve}>
-          {email ? 'Approve & Send' : 'Approve call plan'}
+          {email ? 'Approve & send email' : 'Continue with this plan'}
         </button>
         <button className="btn" disabled={busy} onClick={() => setAskEdit(!askEdit)}>Ask agent to edit</button>
-        <button className="btn danger" disabled={busy} onClick={onReject}>Reject</button>
+        <button className="btn" disabled={busy} onClick={onContinue}>Continue without sending</button>
       </div>
     </div>
   )

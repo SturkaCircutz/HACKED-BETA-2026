@@ -75,12 +75,70 @@ export interface RunEvent {
 
 export type RunStatus = 'running' | 'paused' | 'done' | 'rejected' | 'failed' | 'cancelled'
 
+export interface NearbyPlace {
+  name: string
+  kind: 'public_bin' | 'library' | 'recycling_depot' | 'public_sorting_station' | string
+  address: string
+  lat: number
+  lng: number
+  note: string
+  bin_status: string
+  maps_url: string
+  distance_m?: number
+  route_verified: boolean
+  walking_minutes: number | null
+  walking_minutes_estimate: number | null
+}
+export interface AgentResponse {
+  schema_version: string
+  report_id: string | null
+  category: string
+  priority: 'routine' | 'urgent' | 'emergency'
+  summary: string
+  jurisdiction: { status: 'inside' | 'outside' | 'unknown'; city: string | null; warnings: string[] }
+  clarification: string | null
+  reporting: {
+    reportable: boolean | null
+    requires_311?: boolean | null
+    requires_311_reason?: string
+    contact_name: string | null
+    phone: string | null
+    url: string | null
+    report_text: string
+    status: string
+    submitted: boolean
+    direct_submission_enabled?: boolean
+  }
+  assessment?: {
+    risk: { level: number; label: string; basis: string }
+    requires_311: boolean | null
+    requires_311_reason: string
+    official_instructions: string[]
+    official_instructions_url: string
+    materials: Array<{
+      name: string
+      sustainability_friendly: boolean | null
+      recyclable: boolean | null
+      recycling_condition: string
+      source_url: string
+    }>
+  }
+  steps: string[]
+  nearby_places: NearbyPlace[]
+  thank_you: string
+  follow_up?: string
+  sources: Array<{ title: string; url: string }>
+  warnings: string[]
+  markdown: string
+  meta?: { llm_used?: boolean; processing_warning?: string | null }
+}
 export interface RunResult {
   action_type?: 'email' | 'call'
   draft?: EmailDraft | CallDraft
-  delivery?: { kind: 'email' | 'call'; status: string; action_id?: string; phone?: string | null }
+  delivery?: { kind: 'email' | 'call' | 'guidance'; status: string; action_id?: string; phone?: string | null }
   address?: string
   category?: string
+  ai_response?: AgentResponse | null
 }
 
 export interface Run {
@@ -181,7 +239,7 @@ export const api = {
     req<Run>('POST', '/api/agent/runs', body),
   runsForReport: (reportId: string) => req<Omit<Run, 'events'>[]>('GET', `/api/agent/runs?report_id=${reportId}`),
   getRun: (id: string) => req<Run>('GET', `/api/agent/runs/${id}`),
-  resume: (id: string, body: { decision: 'approve' | 'edit' | 'reject'; draft?: Partial<EmailDraft & CallDraft>; instructions?: string }) =>
+  resume: (id: string, body: { decision: 'approve' | 'edit' | 'continue'; draft?: Partial<EmailDraft & CallDraft>; instructions?: string }) =>
     req<Run>('POST', `/api/agent/runs/${id}/resume`, body),
   cancel: (id: string) => req<Run>('POST', `/api/agent/runs/${id}/cancel`),
   sendMessage: (id: string, content: string) => req<RunEvent[]>('POST', `/api/agent/threads/${id}/messages`, { content }),

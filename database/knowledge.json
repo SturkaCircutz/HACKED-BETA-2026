@@ -1,0 +1,70 @@
+{
+  "verified_at": "2026-11-14",
+  "scope": "Edmonton, Alberta, Canada; short human-reviewed summaries, not a full scrape",
+  "documents": [
+    {
+      "id": "311", "category": "general", "title": "Edmonton 311: non-emergency reporting",
+      "text": "311 handles non-emergency City questions and service requests. Residents can use the official Edmonton 311 website or call 311. A report is not a guarantee of collection. A closed request can have several meanings; confirm the actual outcome before marking an incident removed.",
+      "keywords": ["311", "report", "city", "help", "garbage", "신고", "쓰레기"],
+      "steps": ["Record the location, a short description and a photo taken from a safe public location.", "Review the report text, then use the official Edmonton 311 website or call 311.", "Keep the request number. Confirm the physical outcome before marking the pin resolved."],
+      "reportable": null, "source_url": "https://www.edmonton.ca/programs_services/311-city-services", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "litter", "category": "litter", "title": "Small ordinary litter and safe cleanup",
+      "text": "Small ordinary litter can be collected voluntarily if the area is safe. Use gloves or a litter grabber; do not reach blindly into waste. Do not touch needles, broken glass, chemicals, suspicious sealed items, or heavy furniture. Report unsafe material to 311. Public bins are for incidental litter, not household or bulky disposal.",
+      "keywords": ["litter", "wrapper", "cup", "bottle", "paper", "plastic", "trash", "rubbish", "쓰레기", "종이", "컵", "비닐"],
+      "steps": ["Check for traffic, sharp objects and other hazards before approaching. Only collect small, ordinary litter if you feel safe and have suitable gloves or a grabber.", "Place suitable small litter inside an accessible bin with space. If no suitable bin is available, take it home for appropriate disposal; never leave it beside a bin.", "For unsafe items, a large amount of waste, or cleanup you cannot manage, report the location to 311."],
+      "reportable": true, "source_url": "https://www.edmonton.ca/programs_services/graffiti_litter/cccu-volunteer-safety", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "illegal_dumping", "category": "illegal_dumping", "title": "Dumped furniture and large piles of waste",
+      "text": "Dumping on public or private land without consent can be reported to 311. Furniture, mattresses and other bulky items must not be taken to small public bins or left beside dumpsters. Appropriate disposal may involve an Eco Station or the Edmonton Waste Management Centre; fees may apply. City pickup is not guaranteed, especially on private property.",
+      "keywords": ["dumped", "dumping", "mattress", "sofa", "couch", "furniture", "large pile", "매트리스", "가구", "소파", "무단투기"],
+      "steps": ["Leave heavy, oversized or unknown waste in place; do not move it to a public bin or library.", "From a safe public location, note the closest address, landmarks, type and approximate amount of waste, and take a photo if safe.", "Use Edmonton 311 to report suspected illegal dumping. State whether it is on public or private property, if known.", "Keep the reference number and check the outcome. If you own the waste, use an appropriate waste facility instead of requesting public litter cleanup."],
+      "reportable": true, "source_url": "https://www.edmonton.ca/city_government/bylaws/illegal-dumping", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "overflowing_bin", "category": "overflowing_bin", "title": "Overflowing public waste container",
+      "text": "An overflowing public waste container can be reported to 311. Do not add waste to a full bin or leave bags beside it. Use another suitable bin with space or take ordinary personal litter home. Public waste containers do not replace residential or business collection.",
+      "keywords": ["overflow", "overflowing", "full bin", "full garbage", "trash can", "쓰레기통", "넘쳐", "가득"],
+      "steps": ["Do not add waste to the full container or leave items on or beside it.", "Note the location, nearby landmark and bin identifier if visible; take a photo from a safe position.", "Report the overflowing public container to Edmonton 311.", "For your own small ordinary litter, use another appropriate bin with space or take it home."],
+      "reportable": true, "source_url": "https://www.edmonton.ca/programs_services/garbage_waste/managing-your-waste-public", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "needle", "category": "needle", "title": "Needles: public and private property",
+      "text": "Report needles on public property to 311 or the 311 app. For needles on private property, the City's guidance directs residents to Hiregood at 780-426-0500. Do not put needles in ordinary litter bins. A needle request marked closed can mean pickup has been scheduled, not completed.",
+      "keywords": ["needle", "needles", "syringe", "syringes", "주사기", "주삿바늘", "바늘"],
+      "steps": ["Leave the needle in place, keep a safe distance, and do not place it in a public litter bin.", "Record the precise location and landmarks without touching the item.", "For public property, report it to 311. For private property, contact Hiregood at 780-426-0500.", "Check the actual outcome: a closed needle ticket can mean pickup was scheduled rather than completed."],
+      "private_phone": "780-426-0500", "private_contact": "Hiregood", "reportable": true,
+      "source_url": "https://www.edmonton.ca/programs_services/graffiti_litter/safe-needle-disposal", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "hazardous", "category": "hazardous", "title": "Unsafe materials require trained cleanup",
+      "text": "City volunteer safety guidance says not to touch needles, broken glass, chemicals or oil, suspicious sealed objects, heavy items, or encampments during litter cleanup. Report the location to 311. Do not treat residents' belongings as litter. Immediate danger, active fire or a serious emergency requires 911.",
+      "keywords": ["broken glass", "chemical", "oil spill", "hazardous", "suspicious", "encampment", "유리", "화학", "기름", "위험", "텐트"],
+      "steps": ["Stay back and leave the material or belongings in place. Do not pick up, open or transport the items.", "Record the location and describe what you can observe safely.", "Contact 311 for non-emergency cleanup guidance. If there is an active fire or immediate danger, move to safety and call 911."],
+      "reportable": true, "source_url": "https://www.edmonton.ca/programs_services/graffiti_litter/cccu-volunteer-safety", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "disposal", "category": "disposal", "title": "Disposing of your own waste",
+      "text": "Public litter bins are not for household, business, hazardous or bulky waste. Keep ordinary personal litter until a suitable bin is available. For household or bulky waste use City waste-disposal guidance or an appropriate Eco Station; accepted materials and fees vary. A public library is not an established waste dropoff facility.",
+      "keywords": ["dispose", "disposal", "where can", "my mattress", "my garbage", "throw away", "버리", "배출", "어디"],
+      "steps": ["Identify the material and whether it is a small piece of ordinary litter or household, bulky or hazardous waste.", "Use public bins only for suitable small incidental litter; ask staff before using a facility's indoor bin.", "For household, bulky or hazardous material, check the City's waste guidance and an appropriate facility's accepted items, hours and fees."],
+      "reportable": false, "source_url": "https://www.edmonton.ca/programs_services/garbage_waste/public-space-waste-container-placement-criteria", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "other", "category": "other", "title": "Clarify unsupported or ambiguous reports",
+      "text": "This module covers litter, overflowing public bins, dumped waste and unsafe waste in Edmonton. When the issue or municipal jurisdiction is unclear, ask for clarification. Do not invent an agency, service code or promise of cleanup.",
+      "keywords": ["unknown", "unclear", "other", "모르", "다른"],
+      "steps": ["Describe the item or issue and whether it is on public or private property.", "For a non-emergency City issue in Edmonton, ask 311 which service applies."],
+      "reportable": null, "source_url": "https://www.edmonton.ca/programs_services/311-city-services", "verified_at": "2026-11-14"
+    },
+    {
+      "id": "emergency", "category": "emergency", "title": "Immediate danger",
+      "text": "For life-threatening emergencies, active fire, or urgent police, fire or ambulance help, call 911. 311 is a non-emergency service. Do not delay immediate help to submit an online litter report.",
+      "keywords": ["on fire", "flames", "not breathing", "unconscious", "live wire", "gas leak", "화재", "의식", "가스 누출"],
+      "steps": ["Move to a safe location and avoid the hazard.", "Call 911 for an active fire, life-threatening emergency or immediate danger. Give the location and describe what is happening.", "Do not attempt waste cleanup or wait for an online 311 response."],
+      "reportable": false, "source_url": "https://www.edmonton.ca/programs_services/programs-new-resident", "verified_at": "2026-11-14"
+    }
+  ]
+}

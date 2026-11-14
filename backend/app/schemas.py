@@ -118,7 +118,7 @@ class RunDetail(RunOut):
 
 
 class ResumeIn(BaseModel):
-    decision: Literal["approve", "edit", "reject"]
+    decision: Literal["approve", "edit", "continue"]
     # approve: optional final user-edited draft; edit: instructions for a redraft
     draft: dict[str, Any] | None = None
     instructions: str = ""

@@ -29,5 +29,15 @@ def _trim(value):
 
 def build_context(state: ReportState, target_agent: str, **extra) -> dict:
     ctx = {k: _trim(state[k]) for k in AGENT_FIELDS[target_agent] if state.get(k) not in (None, "", [], {})}
+    if target_agent in {"chat", "branch"} and state.get("ai_response"):
+        response = state["ai_response"]
+        ctx["eco311_advice"] = _trim({
+            "summary": response.get("summary"),
+            "assessment": response.get("assessment"),
+            "steps": response.get("steps"),
+            "nearby_places": response.get("nearby_places", []),
+            "reporting": {k: response.get("reporting", {}).get(k)
+                          for k in ("requires_311", "requires_311_reason", "submitted", "url", "phone")},
+        })
     ctx.update({k: _trim(v) for k, v in extra.items()})
     return ctx

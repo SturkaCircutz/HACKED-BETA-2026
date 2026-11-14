@@ -8,7 +8,7 @@ from .graph import get_graph
 
 log = logging.getLogger(__name__)
 RESULT_KEYS = ["category", "severity", "issue_summary", "address", "jurisdiction_id", "contacts",
-               "contact_source", "nearby", "action_type", "draft", "approval_status", "delivery"]
+               "contact_source", "nearby", "action_type", "draft", "approval_status", "delivery", "ai_response"]
 
 
 def _config(run_id: str) -> dict:
