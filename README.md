@@ -2,9 +2,9 @@
 # Zero Hero
 **Less waste. More possibility.**
 
-Made by Team 'Goat of the Year'
-**Kyumin Park - role in front-end, back-end, design AI-Agent driven service system, manage database and api**
-**Jiawen Sun - role in front-end, back-end, design structure of the project, deploy the project**
+#Made by Team 'Goat of the Year'
+#Kyumin Park - role in front-end, back-end, design AI-Agent driven service system, manage database and api
+#Jiawen Sun - role in front-end, back-end, design structure of the project, deploy the project
 
 ## Quick Start
 
