@@ -70,7 +70,7 @@ The Zero Hero web app is ready to use.
   </tr>
 </table>
 video link:
-[https://github.com/user-attachments/assets/4c14c0ab-4aa3-4a2e-a9dd-011817fe485d](https://vimeo.com/1246878160?fl=tl&fe=ec)
+[Watch Zero Hero Demo on Vimeo](https://vimeo.com/1246878160)
 
 
 ## Technical Implementation
