@@ -156,7 +156,8 @@ async def _decide(state: _State, config: RunnableConfig) -> dict:
                 from langchain_cohere import ChatCohere
                 llm = ChatCohere(model=(os.getenv("COHERE_MODEL") or "command-a-03-2025").removeprefix("cohere:"),
                                  temperature=0, max_tokens=700, timeout_seconds=int(timeout), max_retries=0)
-                raw = await llm.with_structured_output(Decision, method="tool_calling").ainvoke(messages)
+                # json_schema enforces the Literal enums; tool_calling lets Cohere return free text.
+                raw = await llm.with_structured_output(Decision, method="json_schema").ainvoke(messages)
             else:
                 # Groq runs the GPT-OSS model remotely, without local model weights.
                 # This module deliberately does not use the teammate backend's LLM_MODEL.
