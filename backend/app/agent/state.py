@@ -31,6 +31,7 @@ class ReportState(TypedDict, total=False):
     contact_source: str  # kb | web | none
     open311: dict
     nearby: list[dict]
+    ai_response: dict
 
     # 4 draft_action / 5 human_review
     action_type: str  # email | call

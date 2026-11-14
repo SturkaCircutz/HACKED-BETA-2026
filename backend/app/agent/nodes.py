@@ -127,9 +127,23 @@ def nearby_reports(state: ReportState) -> dict:
 
 # 4 ------------------------------------------------------------------------------------------
 def draft_action(state: ReportState) -> dict:
+    try:
+        from agent import analyze_report_sync
+        ai_response = analyze_report_sync(
+            story=state.get("story", ""),
+            lat=state["lat"], lng=state["lng"],
+            report_id=state.get("report_id"),
+            review_feedback=state.get("review_feedback", ""),
+        )
+    except Exception:
+        import logging
+        from .guidance_fallback import fallback_guidance
+        logging.getLogger(__name__).exception("Zero Hero action assessment unavailable")
+        ai_response = fallback_guidance(state)
     contacts = state.get("contacts", [])
     top = contacts[0] if contacts else None
-    action_type = "email" if top and top.get("email") else "call"
+    assistance_needed = (ai_response or {}).get("assessment", {}).get("requires_311")
+    action_type = "email" if top and top.get("email") and assistance_needed is not False else "call"
     ctx = build_context({**state, "action_type": action_type}, "draft_action",
                         contact={"name": top["name"], "hours": top.get("hours")} if top else None)
     out = llm.ask_json("draft_action", ctx) or {}
@@ -156,6 +170,7 @@ def draft_action(state: ReportState) -> dict:
     if state.get("review_feedback"):
         title += " (revised)"
     return {"action_type": action_type, "draft": draft, "approval_status": "awaiting", "review_feedback": "",
+            "ai_response": ai_response,
             "log": [step("draft_action", title, content, draft=draft, action_type=action_type)]}
 
 
@@ -195,6 +210,9 @@ def _fallback_script(state: ReportState, name: str) -> list[str]:
 
 # 5 ------------------------------------------------------------------------------------------
 def human_review(state: ReportState) -> dict:
+    if state.get("action_type") != "email":
+        return {"approval_status": "not_required",
+                "log": [step("human_review", "Guidance ready", "Your plan is ready. No call or City request has been made.")]}
     decision = interrupt({"type": "human_review", "action_type": state["action_type"], "draft": state["draft"]})
     kind = decision.get("decision")
     if kind == "approve":
@@ -205,22 +223,31 @@ def human_review(state: ReportState) -> dict:
         text = decision.get("instructions", "")
         return {"approval_status": "edit_requested", "review_feedback": text,
                 "log": [step("human_review", "Edit requested", f"You asked for changes: {text}")]}
-    return {"approval_status": "rejected", "log": [step("human_review", "Rejected", "You rejected the draft. Nothing was sent.")]}
+    if kind == "continue":
+        return {"approval_status": "skipped",
+                "log": [step("human_review", "Continue without sending", "Your guidance is saved. No email will be sent.")]}
+    raise ValueError("Choose approve, edit, or continue.")
 
 
 def route_after_review(state: ReportState) -> str:
-    return {"approved": "deliver", "edit_requested": "draft_action"}.get(state.get("approval_status"), "__end__")
+    return {"approved": "deliver", "not_required": "deliver", "skipped": "deliver",
+            "edit_requested": "draft_action"}.get(state.get("approval_status"), "__end__")
 
 
 # 6 ------------------------------------------------------------------------------------------
 def deliver(state: ReportState) -> dict:
     draft = state["draft"]
+    if state.get("approval_status") == "skipped":
+        delivery = {"kind": "guidance", "status": "ready"}
+        return {"delivery": delivery,
+                "log": [step("deliver", "Plan saved", "Guidance only. Nothing was sent to an external service.", **delivery)]}
     if state["action_type"] == "email":
         action_id = send_email(draft["to"], draft["subject"], draft["body"], draft.get("photo_ids", []),
                                state["report_id"], approved=state.get("approval_status") == "approved",
                                user_id=state["user_id"], run_id=state["run_id"])
-        delivery = {"kind": "email", "action_id": action_id, "status": "sent"}
-        content = f"Email sent to {draft['to']}."
+        sent = get_settings().email_backend == "ses"
+        delivery = {"kind": "email", "action_id": action_id, "status": "sent" if sent else "preview"}
+        content = f"Email sent to {draft['to']}." if sent else "Email prepared in console mode. No external email was sent."
     else:
         # Calls are never placed by the agent: the UI shows the number + script.
         delivery = {"kind": "call", "status": "ready", "phone": draft.get("phone")}
@@ -234,9 +261,9 @@ def track(state: ReportState) -> dict:
     with SessionLocal() as db:
         r = db.get(Report, state["report_id"])
         r.followup_at = utcnow() + timedelta(days=days)
-        if state["delivery"]["kind"] == "email" and r.status == "open":
+        if state["delivery"]["kind"] == "email" and state["delivery"].get("status") == "sent" and r.status == "open":
             r.status = "action_sent"
             db.add(StatusEvent(report_id=r.id, status="action_sent", note=f"Email sent to {state['draft']['to']}",
                                actor="agent"))
         db.commit()
-    return {"log": [step("track", "Track the pin", f"Linked to pin. I'll ask 'still there?' in {days} days.")]}
+    return {"log": [step("track", "Track the pin", "Your local pin is available on the map. Mark it as cleaned only after the issue is actually resolved.")]}

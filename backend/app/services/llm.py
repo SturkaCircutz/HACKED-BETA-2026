@@ -5,6 +5,7 @@ app runs end to end without any API key.
 """
 import json
 import logging
+import os
 import re
 from functools import lru_cache
 from pathlib import Path
@@ -22,13 +23,26 @@ def load_prompt(name: str) -> str:
 
 @lru_cache
 def get_chat_model(kind: str = "chat"):
+    if os.getenv("ECO311_OFFLINE", "0").lower() in {"1", "true", "yes"}:
+        return None
     settings = get_settings()
     model = (settings.vision_model or settings.llm_model) if kind == "vision" else settings.llm_model
-    if not model:
+    if not model and kind in {"chat", "followup"} and os.getenv("GROQ_API_KEY"):
+        model = "groq:" + (os.getenv("ECO311_MODEL") or "openai/gpt-oss-20b").removeprefix("groq:")
+    if not model or (kind == "vision" and "gpt-oss" in model):
         return None
-    from langchain.chat_models import init_chat_model
-
-    return init_chat_model(model, temperature=0.2)
+    try:
+        timeout = max(1.0, min(float(os.getenv("ECO311_LLM_TIMEOUT", "12")), 25.0))
+        if model.startswith("groq:"):
+            from langchain_groq import ChatGroq
+            options = {"reasoning_effort": "low"} if "gpt-oss" in model else {}
+            return ChatGroq(model=model.removeprefix("groq:"), temperature=0.2,
+                            max_tokens=1400, timeout=timeout, max_retries=0, **options)
+        from langchain.chat_models import init_chat_model
+        return init_chat_model(model, temperature=0.2, timeout=timeout, max_retries=0)
+    except Exception:
+        log.warning("The configured language model could not be initialized.")
+        return None
 
 
 def _parse_json(text: str) -> dict | None:
@@ -66,7 +80,7 @@ def ask_json(prompt_name: str, context: dict, images: list[str] | None = None) -
 
 def ask_text(prompt_name: str, context: dict, history: list[dict]) -> str | None:
     """Free-text chat turn (used by branches and follow-up chat)."""
-    llm = get_chat_model()
+    llm = get_chat_model("followup")
     if llm is None:
         return None
     from langchain_core.messages import AIMessage, HumanMessage, SystemMessage

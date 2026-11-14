@@ -74,15 +74,15 @@ export function MapView(props: Props) {
         paint: {
           'circle-color': STATUS_COLOR as never,
           'circle-radius': ['case', ['get', 'selected'], 10, 7],
-          'circle-stroke-color': '#fff',
+          'circle-stroke-color': '#f1fafd',
           'circle-stroke-width': ['case', ['get', 'selected'], 3, 2],
         } })
       m.addLayer({ id: 'draft-fill', type: 'fill', source: 'draft', filter: ['==', ['geometry-type'], 'Polygon'],
-        paint: { 'fill-color': '#2f5bd3', 'fill-opacity': 0.15 } })
+        paint: { 'fill-color': '#2a7e3b', 'fill-opacity': 0.15 } })
       m.addLayer({ id: 'draft-line', type: 'line', source: 'draft', filter: ['!=', ['geometry-type'], 'Point'],
-        paint: { 'line-color': '#2f5bd3', 'line-width': 2, 'line-dasharray': [2, 1] } })
+        paint: { 'line-color': '#2a7e3b', 'line-width': 2, 'line-dasharray': [2, 1] } })
       m.addLayer({ id: 'draft-pts', type: 'circle', source: 'draft', filter: ['==', ['geometry-type'], 'Point'],
-        paint: { 'circle-color': '#2f5bd3', 'circle-radius': 6, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } })
+        paint: { 'circle-color': '#2a7e3b', 'circle-radius': 6, 'circle-stroke-color': '#f1fafd', 'circle-stroke-width': 2 } })
       emitBounds()
       syncReports()
       syncDraft()
