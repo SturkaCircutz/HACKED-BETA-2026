@@ -19,3 +19,10 @@ app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins, allow_me
                    allow_credentials=True)
 for r in (reports, geo, uploads, agent, actions, kb, account):
     app.include_router(r.router)
+
+# Single-container demo deploy: serve the built frontend from the same origin as the API.
+# Mounted last so /api/* and /healthz keep priority.
+if os.getenv("STATIC_DIR") and os.path.isdir(os.environ["STATIC_DIR"]):
+    from fastapi.staticfiles import StaticFiles
+
+    app.mount("/", StaticFiles(directory=os.environ["STATIC_DIR"], html=True), name="web")
