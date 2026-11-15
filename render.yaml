@@ -1,0 +1,18 @@
+# Render Blueprint: free single-container demo (frontend + API in one service).
+# Render dashboard -> New -> Blueprint -> pick this repo. Then set COHERE_API_KEY when prompted.
+services:
+  - type: web
+    name: zero-hero-demo
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.demo
+    dockerContext: .
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: COHERE_API_KEY
+        sync: false          # secret: entered in the Render dashboard, never committed
+      - key: COHERE_MODEL
+        value: command-a-03-2025
+      - key: EMAIL_BACKEND
+        value: console       # demo: never sends real email
